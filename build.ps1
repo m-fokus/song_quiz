@@ -109,7 +109,7 @@ $template = @'
   .card.flipped { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
   .front { position: relative; }
-  .qr { width: 64%; aspect-ratio: 1; background: #fff; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .qr { width: 64%; aspect-ratio: 1; background: #fff; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
   .qr svg, .qr img { width: 100%; height: 100%; display: block; }
   .back { transform: rotateY(180deg); color: #111; padding: 8% 8% 6%; text-align: center; position: relative; }
   .back .artist { font-size: clamp(22px, 6.5vw, 34px); font-weight: 700; margin-top: 0; line-height: 1.15; }
@@ -287,6 +287,9 @@ function renderQR(url) {
   qr.addData(url);
   qr.make();
   el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
+  const m = url.match(/track\/([A-Za-z0-9]+)/);
+  const target = m ? `spotify:track:${m[1]}` : url;
+  el.onclick = (e) => { e.stopPropagation(); window.location.href = target; };
 }
 
 function render() {
