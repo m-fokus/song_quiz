@@ -104,8 +104,8 @@ $template = @'
   header { width: 100%; max-width: 480px; display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; font-size: 13px; color: #888; }
   header button, header a.btn { background: none; border: 1px solid #333; color: #aaa; padding: 6px 10px; border-radius: 6px; font-size: 13px; text-decoration: none; cursor: pointer; }
   header .group { display: flex; gap: 6px; }
-  .stage { flex: 1; width: 100%; max-width: 480px; display: flex; align-items: center; justify-content: center; perspective: 1200px; padding: 8px 0; }
-  .card { position: relative; width: min(100%, 70vh); aspect-ratio: 1 / 1; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); }
+  .stage { flex: 1; width: 100%; max-width: 480px; display: grid; place-items: center; perspective: 1200px; padding: 8px 0; }
+  .card { position: relative; width: var(--card-size); height: var(--card-size); transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); --card-size: min(calc(100vw - 32px), 70vh, 480px); }
   .card.flipped { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
   .front { position: relative; }
