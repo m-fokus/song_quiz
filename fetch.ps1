@@ -1,4 +1,4 @@
-# Fetch Spotify playlist + resolve release years via iTunes / MusicBrainz.
+﻿# Fetch Spotify playlist + resolve release years via iTunes / MusicBrainz.
 # Outputs CSV compatible with build.ps1
 param(
   [string]$ClientId,

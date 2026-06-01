@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hitster 2026-06-01-1940</title>
+<title>Hitster 2026-06-01-1955</title>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 <style>
   :root { color-scheme: dark; }
@@ -45,7 +45,7 @@
   .back .verify { left: 12px; }
   .back .editBtn { left: 76px; border: 1px solid rgba(0,0,0,0.3); }
   .back .verify:active, .back .editBtn:active { opacity: 1; }
-  .back.edited::after { content: 'âœŽ'; position: absolute; top: 10px; right: 14px; font-size: 14px; opacity: 0.55; }
+  .back.edited::after { content: '✎'; position: absolute; top: 10px; right: 14px; font-size: 14px; opacity: 0.55; }
   /* Edit modal */
   .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 10; padding: 16px; }
   .modal.open { display: flex; }
@@ -71,7 +71,7 @@
 </head>
 <body>
 <header>
-  <span id="counter">â€“</span>
+  <span id="counter">–</span>
   <button id="shuffleBtn">Neu mischen</button>
 </header>
 
@@ -86,23 +86,23 @@
       <div class="year" id="year"></div>
       <div class="title" id="title"></div>
       <div class="idx" id="idx"></div>
-      <a class="verify" id="verify" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">Google â†—</a>
+      <a class="verify" id="verify" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">Google ↗</a>
       <button class="editBtn" id="editBtn" onclick="event.stopPropagation(); openEdit()">Bearbeiten</button>
     </div>
   </div>
 </div>
 
 <div class="controls">
-  <button id="prevBtn">ZurÃ¼ck</button>
+  <button id="prevBtn">Zurück</button>
   <button id="flipBtn">Umdrehen</button>
-  <button id="nextBtn" class="primary">NÃ¤chste</button>
+  <button id="nextBtn" class="primary">Nächste</button>
 </div>
-<div class="footer">v2026-06-01-1940 Â· 2064 Songs</div>
+<div class="footer">v2026-06-01-1955 · 2064 Songs</div>
 
 <div class="modal" id="editModal">
   <div class="modal-box" onclick="event.stopPropagation()">
     <h2>Karte bearbeiten</h2>
-    <label for="editArtist">KÃ¼nstler</label>
+    <label for="editArtist">Künstler</label>
     <input id="editArtist" type="text" autocomplete="off">
     <label for="editSong">Titel</label>
     <input id="editSong" type="text" autocomplete="off">
@@ -110,7 +110,7 @@
     <input id="editYear" type="number" inputmode="numeric" min="1900" max="2099">
     <div class="modal-actions">
       <button class="cancel" onclick="closeEdit()">Abbrechen</button>
-      <button class="reset" onclick="resetOverride()">ZurÃ¼cksetzen</button>
+      <button class="reset" onclick="resetOverride()">Zurücksetzen</button>
       <button class="save" onclick="saveOverride()">Speichern</button>
     </div>
   </div>

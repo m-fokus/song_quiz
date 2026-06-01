@@ -1,4 +1,4 @@
-# Process Exportify CSV: resolve original release year via iTunes (fallback: Spotify).
+﻿# Process Exportify CSV: resolve original release year via iTunes (fallback: Spotify).
 # Outputs CSV ready for build.ps1
 param(
   [Parameter(Mandatory=$true)][string]$Csv,

@@ -1,4 +1,4 @@
-# Build Hitster HTML from CSV export.
+﻿# Build Hitster HTML from CSV export.
 # Usage: .\build.ps1 -Csv "path\to\export.csv"
 param(
   [Parameter(Mandatory=$true)][string]$Csv,
