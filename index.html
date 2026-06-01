@@ -18,8 +18,8 @@
   header { width: 100%; max-width: 480px; display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; font-size: 13px; color: #888; }
   header button, header a.btn { background: none; border: 1px solid #333; color: #aaa; padding: 6px 10px; border-radius: 6px; font-size: 13px; text-decoration: none; cursor: pointer; }
   header .group { display: flex; gap: 6px; }
-  .stage { flex: 1; width: 100%; max-width: 480px; display: flex; align-items: center; justify-content: center; perspective: 1200px; padding: 8px 0; min-height: 0; }
-  .card { position: relative; flex: 0 0 auto; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); }
+  .stage { flex: 1 1 0; width: 100%; max-width: 480px; display: flex; align-items: center; justify-content: center; perspective: 1200px; padding: 8px 0; min-height: 0; overflow: hidden; }
+  .card { position: relative; flex: 0 0 auto; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); overflow: hidden; }
   .card.flipped { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
   .front { position: relative; }
@@ -204,16 +204,24 @@ function effectiveSong(s) {
 
 function sizeCard() {
   const stage = document.querySelector('.stage');
-  if (!stage) return;
+  const card = document.getElementById('card');
+  if (!stage || !card) return;
   const w = stage.clientWidth;
   const h = stage.clientHeight;
   const size = Math.max(160, Math.min(w, h, 480));
-  const card = document.getElementById('card');
-  card.style.width = size + 'px';
-  card.style.height = size + 'px';
+  card.style.setProperty('width',      size + 'px', 'important');
+  card.style.setProperty('height',     size + 'px', 'important');
+  card.style.setProperty('min-width',  size + 'px', 'important');
+  card.style.setProperty('min-height', size + 'px', 'important');
+  card.style.setProperty('max-width',  size + 'px', 'important');
+  card.style.setProperty('max-height', size + 'px', 'important');
 }
 window.addEventListener('resize', sizeCard);
-window.addEventListener('orientationchange', sizeCard);
+window.addEventListener('orientationchange', () => setTimeout(sizeCard, 100));
+if (typeof ResizeObserver !== 'undefined') {
+  // Re-size whenever the stage gets a new layout (after fonts load, etc.)
+  new ResizeObserver(sizeCard).observe(document.querySelector('.stage') || document.body);
+}
 
 function shuffle(arr) {
   const a = arr.slice();
@@ -468,7 +476,7 @@ document.getElementById('editModal').onclick = closeEdit;
     document.getElementById('loading').style.display = 'none';
     document.getElementById('card').style.display = '';
     document.getElementById('flipBtn').disabled = false;
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2050`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2056`;
     sizeCard();
     updateCorrCount();
     updateHiddenCount();
