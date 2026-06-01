@@ -201,9 +201,7 @@ function renderQR(url) {
   qr.addData(url);
   qr.make();
   el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
-  const m = url.match(/track\/([A-Za-z0-9]+)/);
-  const target = m ? `spotify:track:${m[1]}` : url;
-  el.onclick = (e) => { e.stopPropagation(); window.location.href = target; };
+  el.onclick = (e) => { e.stopPropagation(); window.location.href = url; };
 }
 
 function render() {
@@ -346,7 +344,7 @@ document.getElementById('editModal').onclick = closeEdit;
     document.getElementById('loading').style.display = 'none';
     document.getElementById('card').style.display = '';
     document.getElementById('flipBtn').disabled = false;
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2027`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2029`;
     updateCorrCount();
     reshuffle();
   } catch (e) {

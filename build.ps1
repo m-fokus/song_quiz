@@ -287,9 +287,7 @@ function renderQR(url) {
   qr.addData(url);
   qr.make();
   el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
-  const m = url.match(/track\/([A-Za-z0-9]+)/);
-  const target = m ? `spotify:track:${m[1]}` : url;
-  el.onclick = (e) => { e.stopPropagation(); window.location.href = target; };
+  el.onclick = (e) => { e.stopPropagation(); window.location.href = url; };
 }
 
 function render() {
