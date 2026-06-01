@@ -167,7 +167,12 @@ $template = @'
   .card {
     position: relative;
     width: 100%;
+    height: var(--card-size);
     aspect-ratio: 1 / 1;
+    flex: 0 0 auto;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
     transform-style: preserve-3d;
     transition: transform 0.55s cubic-bezier(.2,.7,.2,1);
     perspective: 1200px;
