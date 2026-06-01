@@ -1,0 +1,19 @@
+# Credentials – never commit
+spotify_creds.txt
+*.creds
+*.key
+
+# Raw exports / intermediate data
+*.csv
+HITSTER_APP_PLAYLIST*.csv
+*_export.csv
+*_resolved.csv
+*_fetched.csv
+
+# Versioned build outputs (replaced by index.html)
+hitster_v*.html
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
