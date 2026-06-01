@@ -90,6 +90,11 @@ $template = @'
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Music Quiz</title>
+<link rel="icon" type="image/svg+xml" href="./icon.svg">
+<link rel="apple-touch-icon" href="./icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Music Quiz">
+<meta name="theme-color" content="#0a0a0a">
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 <style>
   :root { color-scheme: dark; }
@@ -100,18 +105,16 @@ $template = @'
   header button, header a.btn { background: none; border: 1px solid #333; color: #aaa; padding: 6px 10px; border-radius: 6px; font-size: 13px; text-decoration: none; cursor: pointer; }
   header .group { display: flex; gap: 6px; }
   .stage { flex: 1; width: 100%; max-width: 480px; display: flex; align-items: center; justify-content: center; perspective: 1200px; padding: 8px 0; min-height: 320px; }
-  .card { position: relative; width: 100%; aspect-ratio: 1/1; max-height: 70vh; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); cursor: pointer; }
+  .card { position: relative; width: 100%; aspect-ratio: 1/1; max-height: 70vh; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); }
   .card.flipped { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
-  .front { background: #000; position: relative; }
-  .rings { position: absolute; inset: 0; }
-  .rings svg { width: 100%; height: 100%; display: block; }
-  .qr { position: relative; z-index: 1; width: 46%; aspect-ratio: 1; background: #fff; padding: 6px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .front { position: relative; }
+  .qr { width: 64%; aspect-ratio: 1; background: #fff; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
   .qr svg, .qr img { width: 100%; height: 100%; display: block; }
   .back { transform: rotateY(180deg); color: #111; padding: 8% 8% 6%; text-align: center; position: relative; }
-  .back .artist { font-size: clamp(18px, 5.2vw, 26px); font-weight: 600; margin-top: 0; line-height: 1.2; }
-  .back .year { font-size: clamp(72px, 22vw, 130px); font-weight: 900; line-height: 0.95; letter-spacing: -3px; margin: 0.15em 0; color: #000; }
-  .back .title { font-size: clamp(16px, 4.4vw, 22px); font-style: italic; line-height: 1.25; }
+  .back .artist { font-size: clamp(22px, 6.5vw, 34px); font-weight: 700; margin-top: 0; line-height: 1.15; }
+  .back .year { font-size: clamp(96px, 28vw, 170px); font-weight: 900; line-height: 0.95; letter-spacing: -4px; margin: 0.1em 0; color: #000; }
+  .back .title { font-size: clamp(18px, 5.2vw, 28px); font-style: italic; font-weight: 500; line-height: 1.25; }
   .back .idx { position: absolute; bottom: 10px; right: 14px; font-size: 11px; opacity: 0.55; font-weight: 600; }
   .back .verify, .back .editBtn { position: absolute; bottom: 8px; font-size: 11px; color: #111; text-decoration: none; opacity: 0.55; padding: 4px 8px; border: 1px solid rgba(0,0,0,0.3); border-radius: 6px; background: rgba(255,255,255,0.25); cursor: pointer; }
   .back .verify { left: 12px; }
@@ -164,8 +167,7 @@ $template = @'
 <div class="stage">
   <div class="loading" id="loading">Lade Songs…</div>
   <div class="card" id="card" style="display:none">
-    <div class="face front">
-      <div class="rings" id="rings"></div>
+    <div class="face front" id="front">
       <div class="qr" id="qr"></div>
     </div>
     <div class="face back" id="back">
@@ -278,17 +280,6 @@ function shuffle(arr) {
   return a;
 }
 
-function renderRings() {
-  const palette = ['#e8534a','#f0c93a','#9ed24a','#4ab7d2','#a47ed2','#d26ea8','#f08a3e','#4ac98a'];
-  let svg = `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">`;
-  for (let i = 0; i < 8; i++) {
-    const r = 48 - i * 3.2;
-    svg += `<circle cx="50" cy="50" r="${r}" fill="none" stroke="${palette[i % palette.length]}" stroke-width="1.4"/>`;
-  }
-  svg += `</svg>`;
-  document.getElementById('rings').innerHTML = svg;
-}
-
 function renderQR(url) {
   const el = document.getElementById('qr');
   el.innerHTML = '';
@@ -296,7 +287,6 @@ function renderQR(url) {
   qr.addData(url);
   qr.make();
   el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
-  el.onclick = (e) => { e.stopPropagation(); window.open(url, '_blank', 'noopener'); };
 }
 
 function render() {
@@ -304,8 +294,10 @@ function render() {
   card.classList.remove('flipped');
   const raw = deck[pos];
   const song = effectiveSong(raw);
+  const color = COLORS[pos % COLORS.length];
+  document.getElementById('front').style.background = color;
   const back = document.getElementById('back');
-  back.style.background = COLORS[pos % COLORS.length];
+  back.style.background = color;
   back.classList.toggle('edited', !!song._edited);
   document.getElementById('counter').textContent = `${pos + 1} / ${deck.length}`;
   document.getElementById('artist').textContent = song.artist;
@@ -426,7 +418,6 @@ function jumpToSong(id) {
 document.getElementById('listBtn').onclick = openList;
 document.getElementById('listModal').onclick = closeList;
 document.getElementById('flipBtn').onclick = () => document.getElementById('card').classList.toggle('flipped');
-document.getElementById('card').onclick = () => document.getElementById('card').classList.toggle('flipped');
 document.getElementById('nextBtn').onclick = () => { if (pos < deck.length - 1) { pos++; render(); } };
 document.getElementById('prevBtn').onclick = () => { if (pos > 0) { pos--; render(); } };
 document.getElementById('shuffleBtn').onclick = () => { if (confirm('Stapel wirklich neu mischen? Der aktuelle Spielverlauf geht verloren.')) reshuffle(); };
@@ -434,7 +425,6 @@ document.getElementById('editModal').onclick = closeEdit;
 
 (async () => {
   try {
-    renderRings();
     await Promise.all([loadSongs(), loadCorrections()]);
     document.getElementById('loading').style.display = 'none';
     document.getElementById('card').style.display = '';
