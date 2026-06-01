@@ -97,7 +97,8 @@ $template = @'
   html, body { margin: 0; height: 100%; background: #0a0a0a; color: #eee; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
   body { display: flex; flex-direction: column; align-items: center; padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom); }
   header { width: 100%; max-width: 480px; display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; font-size: 13px; color: #888; }
-  header button { background: none; border: 1px solid #333; color: #aaa; padding: 6px 10px; border-radius: 6px; font-size: 13px; }
+  header button, header a.btn { background: none; border: 1px solid #333; color: #aaa; padding: 6px 10px; border-radius: 6px; font-size: 13px; text-decoration: none; cursor: pointer; }
+  header .group { display: flex; gap: 6px; }
   .stage { flex: 1; width: 100%; max-width: 480px; display: flex; align-items: center; justify-content: center; perspective: 1200px; padding: 8px 0; min-height: 320px; }
   .card { position: relative; width: 100%; aspect-ratio: 1/1; max-height: 70vh; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); cursor: pointer; }
   .card.flipped { transform: rotateY(180deg); }
@@ -139,6 +140,14 @@ $template = @'
   .modal-actions .save { background: #1db954; color: #fff; }
   .modal-actions .cancel { background: #2a2a2a; color: #eee; }
   .modal-actions .reset { background: #5a2a2a; color: #fbb; }
+  .corr-list { max-height: 60vh; overflow-y: auto; margin: 8px -4px 0; }
+  .corr-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 8px; cursor: pointer; }
+  .corr-item:hover, .corr-item:active { background: #2a2a2a; }
+  .corr-item .info { flex: 1; min-width: 0; }
+  .corr-item .title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .corr-item .meta { font-size: 11px; color: #888; }
+  .corr-item .year { font-size: 18px; font-weight: 800; color: #1db954; margin-left: 12px; }
+  .corr-empty { text-align: center; color: #666; padding: 24px 0; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -146,7 +155,10 @@ $template = @'
 
 <header>
   <span id="counter">–</span>
-  <button id="shuffleBtn">Neu mischen</button>
+  <div class="group">
+    <button id="listBtn">Korrekturen <span id="corrCount">(0)</span></button>
+    <button id="shuffleBtn">Neu mischen</button>
+  </div>
 </header>
 
 <div class="stage">
@@ -173,6 +185,17 @@ $template = @'
   <button id="nextBtn" class="primary" disabled>Nächste</button>
 </div>
 <div class="footer" id="footer">Lade…</div>
+
+<div class="modal" id="listModal">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h2>Korrigierte Songs</h2>
+    <div class="sub">Tipp einen Song, um direkt dort hinzuspringen.</div>
+    <div class="corr-list" id="corrList"></div>
+    <div class="modal-actions">
+      <button class="cancel" onclick="closeList()">Schließen</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal" id="editModal">
   <div class="modal-box" onclick="event.stopPropagation()">
@@ -325,6 +348,7 @@ async function saveOverride() {
   try {
     await saveCorrections();
     showStatus('Gespeichert');
+    updateCorrCount();
     closeEdit();
     render();
   } catch (e) {
@@ -341,6 +365,7 @@ async function resetOverride() {
   try {
     await saveCorrections();
     showStatus('Zurückgesetzt');
+    updateCorrCount();
     closeEdit();
     render();
   } catch (e) {
@@ -350,6 +375,56 @@ async function resetOverride() {
   }
 }
 
+function updateCorrCount() {
+  const n = Object.keys(corrections).length;
+  document.getElementById('corrCount').textContent = `(${n})`;
+}
+function openList() {
+  const list = document.getElementById('corrList');
+  const ids = Object.keys(corrections);
+  if (!ids.length) {
+    list.innerHTML = '<div class="corr-empty">Noch keine Korrekturen vorhanden.</div>';
+  } else {
+    const songById = Object.fromEntries(songs.map(s => [s.id, s]));
+    const items = ids.map(id => ({ id, c: corrections[id], s: songById[id] }))
+      .filter(x => x.s)
+      .sort((a,b) => (b.c.correction_date || '').localeCompare(a.c.correction_date || ''));
+    list.innerHTML = items.map(x => {
+      const safeArtist = (x.s.artist || '').replace(/</g,'&lt;');
+      const safeTitle  = (x.s.track_name || '').replace(/</g,'&lt;');
+      return `<div class="corr-item" data-id="${x.id}">
+        <div class="info">
+          <div class="title">${safeArtist} – ${safeTitle}</div>
+          <div class="meta">${x.s.year_init} → korrigiert ${new Date(x.c.correction_date).toLocaleDateString('de-DE')}</div>
+        </div>
+        <div class="year">${x.c.year_correct}</div>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.corr-item').forEach(el => {
+      el.onclick = () => jumpToSong(el.dataset.id);
+    });
+  }
+  document.getElementById('listModal').classList.add('open');
+}
+function closeList() {
+  document.getElementById('listModal').classList.remove('open');
+}
+function jumpToSong(id) {
+  let idx = deck.findIndex(s => s.id === id);
+  if (idx === -1) {
+    // Song not in current deck (shouldn't happen) — put it on top
+    const s = songs.find(x => x.id === id);
+    if (!s) return;
+    deck = [s, ...deck.filter(x => x.id !== id)];
+    idx = 0;
+  }
+  pos = idx;
+  closeList();
+  render();
+}
+
+document.getElementById('listBtn').onclick = openList;
+document.getElementById('listModal').onclick = closeList;
 document.getElementById('flipBtn').onclick = () => document.getElementById('card').classList.toggle('flipped');
 document.getElementById('card').onclick = () => document.getElementById('card').classList.toggle('flipped');
 document.getElementById('nextBtn').onclick = () => { if (pos < deck.length - 1) { pos++; render(); } };
@@ -365,6 +440,7 @@ document.getElementById('editModal').onclick = closeEdit;
     document.getElementById('card').style.display = '';
     document.getElementById('flipBtn').disabled = false;
     document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v__APP_VERSION__`;
+    updateCorrCount();
     reshuffle();
   } catch (e) {
     document.getElementById('loading').textContent = 'Fehler beim Laden: ' + e.message;
