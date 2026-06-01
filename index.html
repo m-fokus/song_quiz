@@ -30,10 +30,11 @@
   .back .year { font-size: clamp(96px, 28vw, 170px); font-weight: 900; line-height: 0.95; letter-spacing: -4px; margin: 0.1em 0; color: #000; }
   .back .title { font-size: clamp(18px, 5.2vw, 28px); font-style: italic; font-weight: 500; line-height: 1.25; }
   .back .idx { position: absolute; bottom: 10px; right: 14px; font-size: 11px; opacity: 0.55; font-weight: 600; }
-  .back .verify, .back .editBtn { position: absolute; bottom: 8px; font-size: 11px; color: #111; text-decoration: none; opacity: 0.55; padding: 4px 8px; border: 1px solid rgba(0,0,0,0.3); border-radius: 6px; background: rgba(255,255,255,0.25); cursor: pointer; }
+  .back .verify, .back .editBtn, .back .hideBtn { position: absolute; bottom: 8px; font-size: 11px; color: #111; text-decoration: none; opacity: 0.55; padding: 4px 8px; border: 1px solid rgba(0,0,0,0.3); border-radius: 6px; background: rgba(255,255,255,0.25); cursor: pointer; }
   .back .verify { left: 12px; }
   .back .editBtn { left: 76px; }
-  .back .verify:active, .back .editBtn:active { opacity: 1; }
+  .back .hideBtn { left: 156px; }
+  .back .verify:active, .back .editBtn:active, .back .hideBtn:active { opacity: 1; }
   .back.edited::after { content: '✎'; position: absolute; top: 10px; right: 14px; font-size: 14px; opacity: 0.55; }
   .controls { width: 100%; max-width: 480px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; padding: 12px 0 8px; }
   .controls button { padding: 16px; font-size: 15px; font-weight: 600; border-radius: 12px; border: none; background: #2a2a2a; color: #eee; }
@@ -74,6 +75,7 @@
   <span id="counter">–</span>
   <div class="group">
     <button id="listBtn">Korrekturen <span id="corrCount">(0)</span></button>
+    <button id="hiddenBtn">Ausgeblendet <span id="hiddenCount">(0)</span></button>
     <button id="shuffleBtn">Neu mischen</button>
   </div>
 </header>
@@ -91,6 +93,7 @@
       <div class="idx" id="idx"></div>
       <a class="verify" id="verify" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">Google ↗</a>
       <button class="editBtn" id="editBtn" onclick="event.stopPropagation(); openEdit()">Bearbeiten</button>
+      <button class="hideBtn" id="hideBtn" onclick="event.stopPropagation(); hideCurrent()">Ausblenden</button>
     </div>
   </div>
 </div>
@@ -109,6 +112,17 @@
     <div class="corr-list" id="corrList"></div>
     <div class="modal-actions">
       <button class="cancel" onclick="closeList()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="hiddenModal">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h2>Ausgeblendete Songs</h2>
+    <div class="sub">Tipp einen Song, um ihn wieder einzublenden.</div>
+    <div class="corr-list" id="hiddenList"></div>
+    <div class="modal-actions">
+      <button class="cancel" onclick="closeHidden()">Schließen</button>
     </div>
   </div>
 </div>
@@ -135,6 +149,7 @@ const COLORS = ['#e8534a','#f08a3e','#f0c93a','#9ed24a','#4ac98a','#4ab7d2','#5a
 
 let songs = [];
 let corrections = {};
+let hidden = {};
 let deck = [], pos = 0;
 let songsVersion = '?';
 
@@ -155,24 +170,26 @@ async function loadSongs() {
   songsVersion = data.version;
 }
 
-async function loadCorrections() {
+async function loadDb() {
   try {
     const r = await fetch(BIN_URL + '/latest', { headers: { 'X-Access-Key': ACCESS_KEY } });
     if (!r.ok) throw new Error('JSONBin HTTP ' + r.status);
     const data = await r.json();
     corrections = (data.record && data.record.corrections) || {};
+    hidden = (data.record && data.record.hidden) || {};
   } catch (e) {
-    console.warn('Korrekturen konnten nicht geladen werden:', e);
-    showStatus('Korrekturen offline', true);
+    console.warn('DB konnte nicht geladen werden:', e);
+    showStatus('DB offline', true);
     corrections = {};
+    hidden = {};
   }
 }
 
-async function saveCorrections() {
+async function saveDb() {
   const r = await fetch(BIN_URL, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', 'X-Access-Key': ACCESS_KEY },
-    body: JSON.stringify({ corrections })
+    body: JSON.stringify({ corrections, hidden })
   });
   if (!r.ok) throw new Error('JSONBin PUT HTTP ' + r.status);
 }
@@ -225,10 +242,22 @@ function render() {
   renderQR(song.spotify_url);
 }
 
+function visibleSongs() {
+  return songs.filter(s => !hidden[s.id]);
+}
+
 function reshuffle() {
-  deck = shuffle(songs);
+  deck = shuffle(visibleSongs());
   pos = 0;
-  render();
+  if (!deck.length) {
+    document.getElementById('card').style.display = 'none';
+    document.getElementById('loading').style.display = '';
+    document.getElementById('loading').textContent = 'Alle Songs ausgeblendet.';
+  } else {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('card').style.display = '';
+    render();
+  }
 }
 
 function openEdit() {
@@ -253,7 +282,7 @@ async function saveOverride() {
   const prev = corrections[raw.id];
   corrections[raw.id] = { year_correct: y, correction_date: new Date().toISOString() };
   try {
-    await saveCorrections();
+    await saveDb();
     showStatus('Gespeichert');
     updateCorrCount();
     closeEdit();
@@ -270,7 +299,7 @@ async function resetOverride() {
   if (!prev) { closeEdit(); return; }
   delete corrections[raw.id];
   try {
-    await saveCorrections();
+    await saveDb();
     showStatus('Zurückgesetzt');
     updateCorrCount();
     closeEdit();
@@ -285,6 +314,86 @@ async function resetOverride() {
 function updateCorrCount() {
   const n = Object.keys(corrections).length;
   document.getElementById('corrCount').textContent = `(${n})`;
+}
+function updateHiddenCount() {
+  const n = Object.keys(hidden).length;
+  document.getElementById('hiddenCount').textContent = `(${n})`;
+}
+
+async function hideCurrent() {
+  const raw = deck[pos];
+  if (!raw) return;
+  if (!confirm('Diesen Song dauerhaft ausblenden? Du kannst ihn später über „Ausgeblendet" wieder einblenden.')) return;
+  hidden[raw.id] = { hidden_at: new Date().toISOString() };
+  try {
+    await saveDb();
+    showStatus('Ausgeblendet');
+    updateHiddenCount();
+    // Remove from current deck and stay at same position (now shows next song)
+    deck.splice(pos, 1);
+    if (!deck.length) {
+      reshuffle(); // shows empty-state
+      return;
+    }
+    if (pos >= deck.length) pos = deck.length - 1;
+    render();
+  } catch (e) {
+    delete hidden[raw.id];
+    showStatus('Ausblenden fehlgeschlagen', true);
+    console.error(e);
+  }
+}
+
+async function unhide(id) {
+  const prev = hidden[id];
+  if (!prev) return;
+  delete hidden[id];
+  try {
+    await saveDb();
+    showStatus('Eingeblendet');
+    updateHiddenCount();
+    // Add to current deck at next position
+    const s = songs.find(x => x.id === id);
+    if (s) {
+      deck.splice(pos + 1, 0, s);
+    }
+    openHidden(); // refresh list
+  } catch (e) {
+    hidden[id] = prev;
+    showStatus('Einblenden fehlgeschlagen', true);
+    console.error(e);
+  }
+}
+
+function openHidden() {
+  const list = document.getElementById('hiddenList');
+  const ids = Object.keys(hidden);
+  if (!ids.length) {
+    list.innerHTML = '<div class="corr-empty">Keine ausgeblendeten Songs.</div>';
+  } else {
+    const songById = Object.fromEntries(songs.map(s => [s.id, s]));
+    const items = ids.map(id => ({ id, h: hidden[id], s: songById[id] }))
+      .filter(x => x.s)
+      .sort((a,b) => (b.h.hidden_at || '').localeCompare(a.h.hidden_at || ''));
+    list.innerHTML = items.map(x => {
+      const safeArtist = (x.s.artist || '').replace(/</g,'&lt;');
+      const safeTitle  = (x.s.track_name || '').replace(/</g,'&lt;');
+      return `<div class="corr-item" data-id="${x.id}">
+        <div class="info">
+          <div class="title">${safeArtist} – ${safeTitle}</div>
+          <div class="meta">${x.s.year_init} · ausgeblendet ${new Date(x.h.hidden_at).toLocaleDateString('de-DE')}</div>
+        </div>
+        <div class="year" style="color:#d04040;font-size:14px;">↩</div>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.corr-item').forEach(el => {
+      el.onclick = () => unhide(el.dataset.id);
+    });
+  }
+  document.getElementById('hiddenModal').classList.add('open');
+}
+function closeHidden() {
+  document.getElementById('hiddenModal').classList.remove('open');
 }
 function openList() {
   const list = document.getElementById('corrList');
@@ -332,6 +441,8 @@ function jumpToSong(id) {
 
 document.getElementById('listBtn').onclick = openList;
 document.getElementById('listModal').onclick = closeList;
+document.getElementById('hiddenBtn').onclick = openHidden;
+document.getElementById('hiddenModal').onclick = closeHidden;
 document.getElementById('flipBtn').onclick = () => document.getElementById('card').classList.toggle('flipped');
 document.getElementById('nextBtn').onclick = () => { if (pos < deck.length - 1) { pos++; render(); } };
 document.getElementById('prevBtn').onclick = () => { if (pos > 0) { pos--; render(); } };
@@ -340,12 +451,13 @@ document.getElementById('editModal').onclick = closeEdit;
 
 (async () => {
   try {
-    await Promise.all([loadSongs(), loadCorrections()]);
+    await Promise.all([loadSongs(), loadDb()]);
     document.getElementById('loading').style.display = 'none';
     document.getElementById('card').style.display = '';
     document.getElementById('flipBtn').disabled = false;
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2029`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2034`;
     updateCorrCount();
+    updateHiddenCount();
     reshuffle();
   } catch (e) {
     document.getElementById('loading').textContent = 'Fehler beim Laden: ' + e.message;
