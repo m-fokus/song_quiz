@@ -161,9 +161,10 @@ $template = @'
     display: flex;
     flex-direction: column;
     gap: 10px;
+    perspective: 1200px;
   }
 
-  /* Card */
+  /* Card – 3D flip container. NO overflow:hidden here (flattens 3D in browsers). */
   .card {
     position: relative;
     width: 100%;
@@ -172,10 +173,8 @@ $template = @'
     flex: 0 0 auto;
     min-height: 0;
     min-width: 0;
-    overflow: hidden;
     transform-style: preserve-3d;
     transition: transform 0.55s cubic-bezier(.2,.7,.2,1);
-    perspective: 1200px;
   }
   .card.flipped { transform: rotateY(180deg); }
   .face {

@@ -1,6 +1,6 @@
 {
-    "version":  "2026-06-01-2003",
-    "count":  2064,
+    "version":  "2026-06-01-2128",
+    "count":  2174,
     "songs":  [
                   {
                       "id":  "7d23MhPFE9eB3U8DPRirnL",
@@ -14449,6 +14449,776 @@
                       "artist":  "The Lonely Island, T-Pain",
                       "year_init":  2009,
                       "spotify_url":  "https://open.spotify.com/track/3IQSYqnKsCTMLWn2xE3HFT"
+                  },
+                  {
+                      "id":  "3Vby4nGmtbDo7HDJamOWkT",
+                      "track_name":  "Stuck In The Middle With You",
+                      "artist":  "Stealers Wheel",
+                      "year_init":  1972,
+                      "spotify_url":  "https://open.spotify.com/track/3Vby4nGmtbDo7HDJamOWkT"
+                  },
+                  {
+                      "id":  "4OTw5splgMdlYklwHMHxLK",
+                      "track_name":  "Long Cool Woman (In a Black Dress) - 1999 Remaster",
+                      "artist":  "The Hollies",
+                      "year_init":  1967,
+                      "spotify_url":  "https://open.spotify.com/track/4OTw5splgMdlYklwHMHxLK"
+                  },
+                  {
+                      "id":  "72ahyckBJfTigJCFCviVN7",
+                      "track_name":  "Don\u0027t Bring Me Down",
+                      "artist":  "Electric Light Orchestra",
+                      "year_init":  1977,
+                      "spotify_url":  "https://open.spotify.com/track/72ahyckBJfTigJCFCviVN7"
+                  },
+                  {
+                      "id":  "6lFZbCc7pn6Lme1NP7qQqQ",
+                      "track_name":  "You Can\u0027t Always Get What You Want",
+                      "artist":  "The Rolling Stones",
+                      "year_init":  1969,
+                      "spotify_url":  "https://open.spotify.com/track/6lFZbCc7pn6Lme1NP7qQqQ"
+                  },
+                  {
+                      "id":  "3omTpa42nUfQS3OHiRUSeF",
+                      "track_name":  "Breakfast In America - Remastered 2026",
+                      "artist":  "Supertramp",
+                      "year_init":  1979,
+                      "spotify_url":  "https://open.spotify.com/track/3omTpa42nUfQS3OHiRUSeF"
+                  },
+                  {
+                      "id":  "4LujRMTMwAfFKjm45tixHY",
+                      "track_name":  "Straight Outta Compton",
+                      "artist":  "N.W.A.",
+                      "year_init":  1988,
+                      "spotify_url":  "https://open.spotify.com/track/4LujRMTMwAfFKjm45tixHY"
+                  },
+                  {
+                      "id":  "4mSp2FCzwGUN58aurJawQq",
+                      "track_name":  "Boyz-N-The-Hood",
+                      "artist":  "Eazy-E",
+                      "year_init":  1987,
+                      "spotify_url":  "https://open.spotify.com/track/4mSp2FCzwGUN58aurJawQq"
+                  },
+                  {
+                      "id":  "2WBjsxTE3hBInd21yUY65h",
+                      "track_name":  "Clique",
+                      "artist":  "Kanye West",
+                      "year_init":  2005,
+                      "spotify_url":  "https://open.spotify.com/track/2WBjsxTE3hBInd21yUY65h"
+                  },
+                  {
+                      "id":  "1WG3uNOzTWKRwCAfDAlUAW",
+                      "track_name":  "Party Up",
+                      "artist":  "DMX",
+                      "year_init":  1999,
+                      "spotify_url":  "https://open.spotify.com/track/1WG3uNOzTWKRwCAfDAlUAW"
+                  },
+                  {
+                      "id":  "7gNYGnojVbmk6SYRfWA7H2",
+                      "track_name":  "Fuck Tha Police",
+                      "artist":  "N.W.A.",
+                      "year_init":  1988,
+                      "spotify_url":  "https://open.spotify.com/track/7gNYGnojVbmk6SYRfWA7H2"
+                  },
+                  {
+                      "id":  "053GCeKA2Vw5PwF2dGkt03",
+                      "track_name":  "Fast Lane",
+                      "artist":  "Bad Meets Evil",
+                      "year_init":  2011,
+                      "spotify_url":  "https://open.spotify.com/track/053GCeKA2Vw5PwF2dGkt03"
+                  },
+                  {
+                      "id":  "5OY8EtE7tt2nM4c0oxhJY8",
+                      "track_name":  "Fight Music",
+                      "artist":  "D12",
+                      "year_init":  2001,
+                      "spotify_url":  "https://open.spotify.com/track/5OY8EtE7tt2nM4c0oxhJY8"
+                  },
+                  {
+                      "id":  "14hYEzZiDVcTLncBtBdkVf",
+                      "track_name":  "Return of the Tres",
+                      "artist":  "Delinquent Habits",
+                      "year_init":  1998,
+                      "spotify_url":  "https://open.spotify.com/track/14hYEzZiDVcTLncBtBdkVf"
+                  },
+                  {
+                      "id":  "2rxfHBai4BOraDIIRgeMZI",
+                      "track_name":  "Shutterbugg",
+                      "artist":  "Big Boi",
+                      "year_init":  2010,
+                      "spotify_url":  "https://open.spotify.com/track/2rxfHBai4BOraDIIRgeMZI"
+                  },
+                  {
+                      "id":  "17zF4zfyb78Cku56d11gkF",
+                      "track_name":  "Got It",
+                      "artist":  "Boys Noize",
+                      "year_init":  2012,
+                      "spotify_url":  "https://open.spotify.com/track/17zF4zfyb78Cku56d11gkF"
+                  },
+                  {
+                      "id":  "7jupvnbVuuGDsocEdVTKlh",
+                      "track_name":  "Deliverance",
+                      "artist":  "Bubba Sparxxx",
+                      "year_init":  2003,
+                      "spotify_url":  "https://open.spotify.com/track/7jupvnbVuuGDsocEdVTKlh"
+                  },
+                  {
+                      "id":  "4dTMU4O2DdyIlRlss7v9UP",
+                      "track_name":  "Insane in the Brain",
+                      "artist":  "Cypress Hill",
+                      "year_init":  1993,
+                      "spotify_url":  "https://open.spotify.com/track/4dTMU4O2DdyIlRlss7v9UP"
+                  },
+                  {
+                      "id":  "04Dplwxgvi4qcHCNXBQzAc",
+                      "track_name":  "MC\u0027s Act Like They Don\u0027t Know",
+                      "artist":  "KRS-One",
+                      "year_init":  1993,
+                      "spotify_url":  "https://open.spotify.com/track/04Dplwxgvi4qcHCNXBQzAc"
+                  },
+                  {
+                      "id":  "73mcB9zYxdX6nugvInoaB5",
+                      "track_name":  "U.N.I.T.Y.",
+                      "artist":  "Queen Latifah",
+                      "year_init":  1993,
+                      "spotify_url":  "https://open.spotify.com/track/73mcB9zYxdX6nugvInoaB5"
+                  },
+                  {
+                      "id":  "2b7FqlHc3JrzlYtGEkzq22",
+                      "track_name":  "Juicy - 2007 Remaster",
+                      "artist":  "The Notorious B.I.G.",
+                      "year_init":  1994,
+                      "spotify_url":  "https://open.spotify.com/track/2b7FqlHc3JrzlYtGEkzq22"
+                  },
+                  {
+                      "id":  "6Tsu3OsuMz4KEGKbOYd6A0",
+                      "track_name":  "Hypnotize - 2007 Remaster",
+                      "artist":  "The Notorious B.I.G.",
+                      "year_init":  1994,
+                      "spotify_url":  "https://open.spotify.com/track/6Tsu3OsuMz4KEGKbOYd6A0"
+                  },
+                  {
+                      "id":  "6ltPEsP4edATzvinHOzvk2",
+                      "track_name":  "Still D.R.E.",
+                      "artist":  "Dr. Dre",
+                      "year_init":  1999,
+                      "spotify_url":  "https://open.spotify.com/track/6ltPEsP4edATzvinHOzvk2"
+                  },
+                  {
+                      "id":  "2bpZOGUjOTYD8wPA0sqm13",
+                      "track_name":  "New York",
+                      "artist":  "Ja Rule",
+                      "year_init":  1997,
+                      "spotify_url":  "https://open.spotify.com/track/2bpZOGUjOTYD8wPA0sqm13"
+                  },
+                  {
+                      "id":  "2MQ51y5NhCyva4SgWmK2Me",
+                      "track_name":  "Ghetto Gospel",
+                      "artist":  "2Pac",
+                      "year_init":  2004,
+                      "spotify_url":  "https://open.spotify.com/track/2MQ51y5NhCyva4SgWmK2Me"
+                  },
+                  {
+                      "id":  "4kohDZqfqY3t2qk8Xeirpy",
+                      "track_name":  "Hip Hop Is Dead",
+                      "artist":  "Nas",
+                      "year_init":  2006,
+                      "spotify_url":  "https://open.spotify.com/track/4kohDZqfqY3t2qk8Xeirpy"
+                  },
+                  {
+                      "id":  "2OsGdZYDdTK4pxDMsK0Blv",
+                      "track_name":  "Ms. Fat Booty",
+                      "artist":  "Mos Def",
+                      "year_init":  1994,
+                      "spotify_url":  "https://open.spotify.com/track/2OsGdZYDdTK4pxDMsK0Blv"
+                  },
+                  {
+                      "id":  "3kG2YgxjYnnPBlo7H08Xt3",
+                      "track_name":  "Mo Money Mo Problems (feat. Mase \u0026 Puff Daddy)",
+                      "artist":  "The Notorious B.I.G.",
+                      "year_init":  1997,
+                      "spotify_url":  "https://open.spotify.com/track/3kG2YgxjYnnPBlo7H08Xt3"
+                  },
+                  {
+                      "id":  "5YpZh8wfS4moRBk0ijNcXr",
+                      "track_name":  "Harder Than You Think",
+                      "artist":  "Public Enemy",
+                      "year_init":  2006,
+                      "spotify_url":  "https://open.spotify.com/track/5YpZh8wfS4moRBk0ijNcXr"
+                  },
+                  {
+                      "id":  "6mZcNu9i8uhOYMiEAyEx81",
+                      "track_name":  "How We Do",
+                      "artist":  "The Game",
+                      "year_init":  1995,
+                      "spotify_url":  "https://open.spotify.com/track/6mZcNu9i8uhOYMiEAyEx81"
+                  },
+                  {
+                      "id":  "4vk4WOyNox2MUod49fylnM",
+                      "track_name":  "212",
+                      "artist":  "Azealia Banks",
+                      "year_init":  2012,
+                      "spotify_url":  "https://open.spotify.com/track/4vk4WOyNox2MUod49fylnM"
+                  },
+                  {
+                      "id":  "3E8PkaM1BIxy4zh7HbVScC",
+                      "track_name":  "Be (Intro)",
+                      "artist":  "Common",
+                      "year_init":  2005,
+                      "spotify_url":  "https://open.spotify.com/track/3E8PkaM1BIxy4zh7HbVScC"
+                  },
+                  {
+                      "id":  "3wauST900TNdlPA66c7TdI",
+                      "track_name":  "Blue Sky",
+                      "artist":  "Common",
+                      "year_init":  1977,
+                      "spotify_url":  "https://open.spotify.com/track/3wauST900TNdlPA66c7TdI"
+                  },
+                  {
+                      "id":  "6qNZlYTxkcrRZU78FVvJYY",
+                      "track_name":  "Real Hip Hop",
+                      "artist":  "Das EFX",
+                      "year_init":  1992,
+                      "spotify_url":  "https://open.spotify.com/track/6qNZlYTxkcrRZU78FVvJYY"
+                  },
+                  {
+                      "id":  "30x02b44eHz5GTtAebPNeM",
+                      "track_name":  "I Got a Love",
+                      "artist":  "Pete Rock",
+                      "year_init":  1992,
+                      "spotify_url":  "https://open.spotify.com/track/30x02b44eHz5GTtAebPNeM"
+                  },
+                  {
+                      "id":  "3vYxoh9Y7L5Tdr0mhaAaUu",
+                      "track_name":  "Breakadawn",
+                      "artist":  "De La Soul",
+                      "year_init":  1989,
+                      "spotify_url":  "https://open.spotify.com/track/3vYxoh9Y7L5Tdr0mhaAaUu"
+                  },
+                  {
+                      "id":  "2csZjWgi4AxkaDrx16KaBJ",
+                      "track_name":  "9th Wonder",
+                      "artist":  "Digable Planets",
+                      "year_init":  1992,
+                      "spotify_url":  "https://open.spotify.com/track/2csZjWgi4AxkaDrx16KaBJ"
+                  },
+                  {
+                      "id":  "0ml9F1evwfGmEoKMQ8TQO2",
+                      "track_name":  "5 O\u0027Clock",
+                      "artist":  "Nonchalant",
+                      "year_init":  1995,
+                      "spotify_url":  "https://open.spotify.com/track/0ml9F1evwfGmEoKMQ8TQO2"
+                  },
+                  {
+                      "id":  "6zUDIc2TRySY7SRQopnNlC",
+                      "track_name":  "Unknowhowedu",
+                      "artist":  "Bahamadia",
+                      "year_init":  2014,
+                      "spotify_url":  "https://open.spotify.com/track/6zUDIc2TRySY7SRQopnNlC"
+                  },
+                  {
+                      "id":  "1O3vMVyYgzImMEDs1UcFpc",
+                      "track_name":  "All Glocks Down",
+                      "artist":  "Heather B",
+                      "year_init":  2014,
+                      "spotify_url":  "https://open.spotify.com/track/1O3vMVyYgzImMEDs1UcFpc"
+                  },
+                  {
+                      "id":  "7F4xqC9BDRsV7JcyVNDhjd",
+                      "track_name":  "East Coast West Coast Killas",
+                      "artist":  "Group Therapy",
+                      "year_init":  1996,
+                      "spotify_url":  "https://open.spotify.com/track/7F4xqC9BDRsV7JcyVNDhjd"
+                  },
+                  {
+                      "id":  "3gEnEKhcw4MYt3lkn3xp5h",
+                      "track_name":  "Ghetto Bird",
+                      "artist":  "Ice Cube",
+                      "year_init":  1991,
+                      "spotify_url":  "https://open.spotify.com/track/3gEnEKhcw4MYt3lkn3xp5h"
+                  },
+                  {
+                      "id":  "6jL2TZWTji6zJ1lZRSxR3z",
+                      "track_name":  "Real Muthaphuckkin G\u0027s",
+                      "artist":  "Eazy-E",
+                      "year_init":  1995,
+                      "spotify_url":  "https://open.spotify.com/track/6jL2TZWTji6zJ1lZRSxR3z"
+                  },
+                  {
+                      "id":  "6EQklSBo4XGK5ySR2v0HCO",
+                      "track_name":  "On Them Thangs",
+                      "artist":  "Mack 10",
+                      "year_init":  1997,
+                      "spotify_url":  "https://open.spotify.com/track/6EQklSBo4XGK5ySR2v0HCO"
+                  },
+                  {
+                      "id":  "0fhYW07oly4bBlDzqz2KyP",
+                      "track_name":  "Ruff, Rugged \u0026 Raw",
+                      "artist":  "DoubleX",
+                      "year_init":  2014,
+                      "spotify_url":  "https://open.spotify.com/track/0fhYW07oly4bBlDzqz2KyP"
+                  },
+                  {
+                      "id":  "27WzOTkUhCa0ji2MHDwu9r",
+                      "track_name":  "Crewz Pop",
+                      "artist":  "Da Youngsta\u0027s",
+                      "year_init":  1994,
+                      "spotify_url":  "https://open.spotify.com/track/27WzOTkUhCa0ji2MHDwu9r"
+                  },
+                  {
+                      "id":  "3wr4mEDeomDvOL5QWq8R8A",
+                      "track_name":  "Stages and Lights",
+                      "artist":  "Sadat X",
+                      "year_init":  1996,
+                      "spotify_url":  "https://open.spotify.com/track/3wr4mEDeomDvOL5QWq8R8A"
+                  },
+                  {
+                      "id":  "4bo06qfcbBC4TTRqN0iCPm",
+                      "track_name":  "Itz da Joint",
+                      "artist":  "Joint Ventures",
+                      "year_init":  2014,
+                      "spotify_url":  "https://open.spotify.com/track/4bo06qfcbBC4TTRqN0iCPm"
+                  },
+                  {
+                      "id":  "7IdAY4H9AhCDLoOnK3Ji6p",
+                      "track_name":  "Fat Cats, Bigga Fish",
+                      "artist":  "The Coup",
+                      "year_init":  2014,
+                      "spotify_url":  "https://open.spotify.com/track/7IdAY4H9AhCDLoOnK3Ji6p"
+                  },
+                  {
+                      "id":  "5NsIBMVVpMMH6En4iu7PLz",
+                      "track_name":  "C\u0027mon",
+                      "artist":  "Grav",
+                      "year_init":  2001,
+                      "spotify_url":  "https://open.spotify.com/track/5NsIBMVVpMMH6En4iu7PLz"
+                  },
+                  {
+                      "id":  "3UbGUFxsiSDl5jidq9rFmC",
+                      "track_name":  "Case of the P.T.A.",
+                      "artist":  "Leaders of the New School",
+                      "year_init":  1991,
+                      "spotify_url":  "https://open.spotify.com/track/3UbGUFxsiSDl5jidq9rFmC"
+                  },
+                  {
+                      "id":  "33hgJSPKUy3WSvyvLAJFmZ",
+                      "track_name":  "Victim of the Ghetto",
+                      "artist":  "College Boyz",
+                      "year_init":  1997,
+                      "spotify_url":  "https://open.spotify.com/track/33hgJSPKUy3WSvyvLAJFmZ"
+                  },
+                  {
+                      "id":  "70MIcS5eLolVxvCK3l9Tzk",
+                      "track_name":  "Tic Toc",
+                      "artist":  "Lords Of The Underground",
+                      "year_init":  1993,
+                      "spotify_url":  "https://open.spotify.com/track/70MIcS5eLolVxvCK3l9Tzk"
+                  },
+                  {
+                      "id":  "0nua7peZlM71Rau71oEeRr",
+                      "track_name":  "Funkin\u0027 Lesson",
+                      "artist":  "X-Clan",
+                      "year_init":  1990,
+                      "spotify_url":  "https://open.spotify.com/track/0nua7peZlM71Rau71oEeRr"
+                  },
+                  {
+                      "id":  "6EElYDYyvvohMNDbYnrvn4",
+                      "track_name":  "Simon Says",
+                      "artist":  "Pharoahe Monch",
+                      "year_init":  1999,
+                      "spotify_url":  "https://open.spotify.com/track/6EElYDYyvvohMNDbYnrvn4"
+                  },
+                  {
+                      "id":  "07FsLHBX1GZTSqTGxi37S7",
+                      "track_name":  "Wrong Side of the Tracks",
+                      "artist":  "Artifacts",
+                      "year_init":  1995,
+                      "spotify_url":  "https://open.spotify.com/track/07FsLHBX1GZTSqTGxi37S7"
+                  },
+                  {
+                      "id":  "41b0BeZKD8ITsfZoTlFNl7",
+                      "track_name":  "The Most Beautifullest Thing in This World",
+                      "artist":  "Keith Murray",
+                      "year_init":  1973,
+                      "spotify_url":  "https://open.spotify.com/track/41b0BeZKD8ITsfZoTlFNl7"
+                  },
+                  {
+                      "id":  "0jPOocXgNNFMpC68LEaSV0",
+                      "track_name":  "Round and Round",
+                      "artist":  "Hi-Tek",
+                      "year_init":  1984,
+                      "spotify_url":  "https://open.spotify.com/track/0jPOocXgNNFMpC68LEaSV0"
+                  },
+                  {
+                      "id":  "4otcHKAwPjRU2zUU3opqGu",
+                      "track_name":  "Hip Hop (RBG Mix)",
+                      "artist":  "Dead Prez",
+                      "year_init":  1999,
+                      "spotify_url":  "https://open.spotify.com/track/4otcHKAwPjRU2zUU3opqGu"
+                  },
+                  {
+                      "id":  "0tTr0Q7eDyoKviyGNoIFE9",
+                      "track_name":  "They Reminisce Over You (T.R.O.Y.)",
+                      "artist":  "Pete Rock",
+                      "year_init":  1992,
+                      "spotify_url":  "https://open.spotify.com/track/0tTr0Q7eDyoKviyGNoIFE9"
+                  },
+                  {
+                      "id":  "7nfmccqIuRGgowhKKZb85B",
+                      "track_name":  "Move Ya Body",
+                      "artist":  "Mad Skillz",
+                      "year_init":  2004,
+                      "spotify_url":  "https://open.spotify.com/track/7nfmccqIuRGgowhKKZb85B"
+                  },
+                  {
+                      "id":  "6EdEbo7suAMdKeeAAu5BHB",
+                      "track_name":  "Anything Goes",
+                      "artist":  "Ras Kass",
+                      "year_init":  2024,
+                      "spotify_url":  "https://open.spotify.com/track/6EdEbo7suAMdKeeAAu5BHB"
+                  },
+                  {
+                      "id":  "5Yy8qb7dbtjvNP7v0ZqRkE",
+                      "track_name":  "Public Enemy No. 1",
+                      "artist":  "Public Enemy",
+                      "year_init":  1979,
+                      "spotify_url":  "https://open.spotify.com/track/5Yy8qb7dbtjvNP7v0ZqRkE"
+                  },
+                  {
+                      "id":  "21vK2H1V00eYE22ry1TDPj",
+                      "track_name":  "Still Got Love 4 \u0027Um",
+                      "artist":  "Kam",
+                      "year_init":  2000,
+                      "spotify_url":  "https://open.spotify.com/track/21vK2H1V00eYE22ry1TDPj"
+                  },
+                  {
+                      "id":  "2biZTigdkyGlqH3zqjVdNB",
+                      "track_name":  "3 Tha Hard Way",
+                      "artist":  "Bahamadia",
+                      "year_init":  2022,
+                      "spotify_url":  "https://open.spotify.com/track/2biZTigdkyGlqH3zqjVdNB"
+                  },
+                  {
+                      "id":  "1sSs3yjQzGNoTCXzCHoamV",
+                      "track_name":  "Paparazzi",
+                      "artist":  "Xzibit",
+                      "year_init":  1996,
+                      "spotify_url":  "https://open.spotify.com/track/1sSs3yjQzGNoTCXzCHoamV"
+                  },
+                  {
+                      "id":  "1HVEBaXOm56CsS62LtgCX3",
+                      "track_name":  "Come Clean",
+                      "artist":  "Jeru The Damaja",
+                      "year_init":  1994,
+                      "spotify_url":  "https://open.spotify.com/track/1HVEBaXOm56CsS62LtgCX3"
+                  },
+                  {
+                      "id":  "0PzTvgqZaJGjc5hW4mWXRo",
+                      "track_name":  "Do You Believe?",
+                      "artist":  "The Beatnuts",
+                      "year_init":  1997,
+                      "spotify_url":  "https://open.spotify.com/track/0PzTvgqZaJGjc5hW4mWXRo"
+                  },
+                  {
+                      "id":  "5vWyN6QdXa7CIzrUhXiOme",
+                      "track_name":  "Scheming (feat. J. Dilla, De La Soul and Phife)",
+                      "artist":  "Slum Village",
+                      "year_init":  2010,
+                      "spotify_url":  "https://open.spotify.com/track/5vWyN6QdXa7CIzrUhXiOme"
+                  },
+                  {
+                      "id":  "0FmqWrtW4CVygkTlL32W5K",
+                      "track_name":  "First In Flight",
+                      "artist":  "Blackalicious",
+                      "year_init":  2002,
+                      "spotify_url":  "https://open.spotify.com/track/0FmqWrtW4CVygkTlL32W5K"
+                  },
+                  {
+                      "id":  "736y1ZQptSw5iaMkbmvu9X",
+                      "track_name":  "Press Rewind",
+                      "artist":  "Del The Funky Homosapien",
+                      "year_init":  1993,
+                      "spotify_url":  "https://open.spotify.com/track/736y1ZQptSw5iaMkbmvu9X"
+                  },
+                  {
+                      "id":  "3Y6XWs8xMlCngyIxNOFnsp",
+                      "track_name":  "Sound of da Police",
+                      "artist":  "KRS-One",
+                      "year_init":  1990,
+                      "spotify_url":  "https://open.spotify.com/track/3Y6XWs8xMlCngyIxNOFnsp"
+                  },
+                  {
+                      "id":  "13XHuE00ElL5thSxkaEXxK",
+                      "track_name":  "Only God Can Judge Me",
+                      "artist":  "2Pac",
+                      "year_init":  1996,
+                      "spotify_url":  "https://open.spotify.com/track/13XHuE00ElL5thSxkaEXxK"
+                  },
+                  {
+                      "id":  "19JUKimeLAspEwJ2SvH7Jk",
+                      "track_name":  "Boom",
+                      "artist":  "Royce Da 5\u00279\"",
+                      "year_init":  2001,
+                      "spotify_url":  "https://open.spotify.com/track/19JUKimeLAspEwJ2SvH7Jk"
+                  },
+                  {
+                      "id":  "5PzI7J5hzyU1tMq8QhodfK",
+                      "track_name":  "Wir waren mal Stars",
+                      "artist":  "Torch",
+                      "year_init":  2000,
+                      "spotify_url":  "https://open.spotify.com/track/5PzI7J5hzyU1tMq8QhodfK"
+                  },
+                  {
+                      "id":  "3YKptz29AsOlm7WAVnztBh",
+                      "track_name":  "Kiss from a Rose",
+                      "artist":  "Seal",
+                      "year_init":  1994,
+                      "spotify_url":  "https://open.spotify.com/track/3YKptz29AsOlm7WAVnztBh"
+                  },
+                  {
+                      "id":  "67iAlVNDDdddxqSD2EZhFs",
+                      "track_name":  "I\u0027m Gonna Be (500 Miles)",
+                      "artist":  "The Proclaimers",
+                      "year_init":  1988,
+                      "spotify_url":  "https://open.spotify.com/track/67iAlVNDDdddxqSD2EZhFs"
+                  },
+                  {
+                      "id":  "7o7E1nrHWncYY7PY94gCiX",
+                      "track_name":  "Video Killed The Radio Star",
+                      "artist":  "The Buggles",
+                      "year_init":  1974,
+                      "spotify_url":  "https://open.spotify.com/track/7o7E1nrHWncYY7PY94gCiX"
+                  },
+                  {
+                      "id":  "2zMJN9JvDlvGP4jB03l1Bz",
+                      "track_name":  "Hot Stuff",
+                      "artist":  "Donna Summer",
+                      "year_init":  1979,
+                      "spotify_url":  "https://open.spotify.com/track/2zMJN9JvDlvGP4jB03l1Bz"
+                  },
+                  {
+                      "id":  "1ot6jEe4w4hYnsOPjd3xKQ",
+                      "track_name":  "I\u0027m So Excited",
+                      "artist":  "The Pointer Sisters",
+                      "year_init":  1982,
+                      "spotify_url":  "https://open.spotify.com/track/1ot6jEe4w4hYnsOPjd3xKQ"
+                  },
+                  {
+                      "id":  "3850dYVgOFIXJh5U4BFEWH",
+                      "track_name":  "Hung Up",
+                      "artist":  "Madonna",
+                      "year_init":  2005,
+                      "spotify_url":  "https://open.spotify.com/track/3850dYVgOFIXJh5U4BFEWH"
+                  },
+                  {
+                      "id":  "4aVuWgvD0X63hcOCnZtNFA",
+                      "track_name":  "Hold the Line",
+                      "artist":  "TOTO",
+                      "year_init":  1978,
+                      "spotify_url":  "https://open.spotify.com/track/4aVuWgvD0X63hcOCnZtNFA"
+                  },
+                  {
+                      "id":  "5Hyr47BBGpvOfcykSCcaw9",
+                      "track_name":  "Holding Out for a Hero - From \"Footloose\" Soundtrack",
+                      "artist":  "Bonnie Tyler",
+                      "year_init":  1984,
+                      "spotify_url":  "https://open.spotify.com/track/5Hyr47BBGpvOfcykSCcaw9"
+                  },
+                  {
+                      "id":  "6erBowZaW6Ur3vNOWhS2zM",
+                      "track_name":  "One Night in Bangkok",
+                      "artist":  "Murray Head",
+                      "year_init":  1984,
+                      "spotify_url":  "https://open.spotify.com/track/6erBowZaW6Ur3vNOWhS2zM"
+                  },
+                  {
+                      "id":  "0pMj03SiaZ9bkFlXQWNhtZ",
+                      "track_name":  "Life",
+                      "artist":  "Jamie xx",
+                      "year_init":  2012,
+                      "spotify_url":  "https://open.spotify.com/track/0pMj03SiaZ9bkFlXQWNhtZ"
+                  },
+                  {
+                      "id":  "1PtQJZVZIdWIYdARpZRDFO",
+                      "track_name":  "Running Up That Hill (A Deal With God)",
+                      "artist":  "Kate Bush",
+                      "year_init":  1985,
+                      "spotify_url":  "https://open.spotify.com/track/1PtQJZVZIdWIYdARpZRDFO"
+                  },
+                  {
+                      "id":  "49edirvFZwWjxAMZJRg1hN",
+                      "track_name":  "Lovesong",
+                      "artist":  "The Cure",
+                      "year_init":  1989,
+                      "spotify_url":  "https://open.spotify.com/track/49edirvFZwWjxAMZJRg1hN"
+                  },
+                  {
+                      "id":  "5YSI1311X8t31PBjkBG4CZ",
+                      "track_name":  "Wuthering Heights",
+                      "artist":  "Kate Bush",
+                      "year_init":  1980,
+                      "spotify_url":  "https://open.spotify.com/track/5YSI1311X8t31PBjkBG4CZ"
+                  },
+                  {
+                      "id":  "4mWahKerLaVddUjb8d1Q4Q",
+                      "track_name":  "The Man Who Sold the World - 2015 Remaster",
+                      "artist":  "David Bowie",
+                      "year_init":  1970,
+                      "spotify_url":  "https://open.spotify.com/track/4mWahKerLaVddUjb8d1Q4Q"
+                  },
+                  {
+                      "id":  "35ISBknsCeZQtq66xABI9g",
+                      "track_name":  "Messy",
+                      "artist":  "Lola Young",
+                      "year_init":  2024,
+                      "spotify_url":  "https://open.spotify.com/track/35ISBknsCeZQtq66xABI9g"
+                  },
+                  {
+                      "id":  "6393yGahSJ9slVdOwSxOVR",
+                      "track_name":  "Pink Pony Club",
+                      "artist":  "Chappell Roan",
+                      "year_init":  2020,
+                      "spotify_url":  "https://open.spotify.com/track/6393yGahSJ9slVdOwSxOVR"
+                  },
+                  {
+                      "id":  "6zfczP87XO2SxWlQtnjFNa",
+                      "track_name":  "The Look",
+                      "artist":  "Metronomy",
+                      "year_init":  2011,
+                      "spotify_url":  "https://open.spotify.com/track/6zfczP87XO2SxWlQtnjFNa"
+                  },
+                  {
+                      "id":  "3p84R45PM75ngq8XRoe45o",
+                      "track_name":  "Nothing Matters",
+                      "artist":  "The Last Dinner Party",
+                      "year_init":  1975,
+                      "spotify_url":  "https://open.spotify.com/track/3p84R45PM75ngq8XRoe45o"
+                  },
+                  {
+                      "id":  "66tkDkPsznE5zIHNt4QkXB",
+                      "track_name":  "Tieduprightnow",
+                      "artist":  "Parcels",
+                      "year_init":  2018,
+                      "spotify_url":  "https://open.spotify.com/track/66tkDkPsznE5zIHNt4QkXB"
+                  },
+                  {
+                      "id":  "4iG2gAwKXsOcijVaVXzRPW",
+                      "track_name":  "Time to Pretend",
+                      "artist":  "MGMT",
+                      "year_init":  2007,
+                      "spotify_url":  "https://open.spotify.com/track/4iG2gAwKXsOcijVaVXzRPW"
+                  },
+                  {
+                      "id":  "3aQ9MHkMeL7Yu7jpyF62xn",
+                      "track_name":  "Neverender",
+                      "artist":  "Justice",
+                      "year_init":  2024,
+                      "spotify_url":  "https://open.spotify.com/track/3aQ9MHkMeL7Yu7jpyF62xn"
+                  },
+                  {
+                      "id":  "3SUusuA9jH1v6PVwtYMbdv",
+                      "track_name":  "Last Nite",
+                      "artist":  "The Strokes",
+                      "year_init":  2001,
+                      "spotify_url":  "https://open.spotify.com/track/3SUusuA9jH1v6PVwtYMbdv"
+                  },
+                  {
+                      "id":  "56NkIxSZZiMpFP5ZNSxtnT",
+                      "track_name":  "Someday",
+                      "artist":  "The Strokes",
+                      "year_init":  2001,
+                      "spotify_url":  "https://open.spotify.com/track/56NkIxSZZiMpFP5ZNSxtnT"
+                  },
+                  {
+                      "id":  "0Rqwa6i410IwhTiugt6vXi",
+                      "track_name":  "Islands",
+                      "artist":  "The xx",
+                      "year_init":  2009,
+                      "spotify_url":  "https://open.spotify.com/track/0Rqwa6i410IwhTiugt6vXi"
+                  },
+                  {
+                      "id":  "5UBBJnFxsfjFxfrtvErQoH",
+                      "track_name":  "Crystalised",
+                      "artist":  "The xx",
+                      "year_init":  2009,
+                      "spotify_url":  "https://open.spotify.com/track/5UBBJnFxsfjFxfrtvErQoH"
+                  },
+                  {
+                      "id":  "6INLpBxo9F5QMer04VXEnd",
+                      "track_name":  "Sexy Boy",
+                      "artist":  "Air",
+                      "year_init":  1998,
+                      "spotify_url":  "https://open.spotify.com/track/6INLpBxo9F5QMer04VXEnd"
+                  },
+                  {
+                      "id":  "2DrGEaqoruCSn0FffWCf5O",
+                      "track_name":  "A-Punk",
+                      "artist":  "Vampire Weekend",
+                      "year_init":  2008,
+                      "spotify_url":  "https://open.spotify.com/track/2DrGEaqoruCSn0FffWCf5O"
+                  },
+                  {
+                      "id":  "6b8Be6ljOzmkOmFslEb23P",
+                      "track_name":  "24K Magic",
+                      "artist":  "Bruno Mars",
+                      "year_init":  2016,
+                      "spotify_url":  "https://open.spotify.com/track/6b8Be6ljOzmkOmFslEb23P"
+                  },
+                  {
+                      "id":  "32OlwWuMpZ6b0aN2RZOeMS",
+                      "track_name":  "Uptown Funk (feat. Bruno Mars)",
+                      "artist":  "Mark Ronson",
+                      "year_init":  2014,
+                      "spotify_url":  "https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS"
+                  },
+                  {
+                      "id":  "5W3cjX2J3tjhG8zb6u0qHn",
+                      "track_name":  "Harder, Better, Faster, Stronger",
+                      "artist":  "Daft Punk",
+                      "year_init":  2001,
+                      "spotify_url":  "https://open.spotify.com/track/5W3cjX2J3tjhG8zb6u0qHn"
+                  },
+                  {
+                      "id":  "7eYzn1CuiJK6VvUhf8zA6k",
+                      "track_name":  "WHERE IS MY HUSBAND!",
+                      "artist":  "RAYE",
+                      "year_init":  2025,
+                      "spotify_url":  "https://open.spotify.com/track/7eYzn1CuiJK6VvUhf8zA6k"
+                  },
+                  {
+                      "id":  "0k2GOhqsrxDTAbFFSdNJjT",
+                      "track_name":  "Temperature",
+                      "artist":  "Sean Paul",
+                      "year_init":  2005,
+                      "spotify_url":  "https://open.spotify.com/track/0k2GOhqsrxDTAbFFSdNJjT"
+                  },
+                  {
+                      "id":  "5TbzAWWc5eJaANpA9kfGCd",
+                      "track_name":  "Love Me Again",
+                      "artist":  "John Newman",
+                      "year_init":  2013,
+                      "spotify_url":  "https://open.spotify.com/track/5TbzAWWc5eJaANpA9kfGCd"
+                  },
+                  {
+                      "id":  "53iuhJlwXhSER5J2IYYv1W",
+                      "track_name":  "The Fate of Ophelia",
+                      "artist":  "Taylor Swift",
+                      "year_init":  2025,
+                      "spotify_url":  "https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"
+                  },
+                  {
+                      "id":  "7hCNBVRhHzcsRAv0TQnOzq",
+                      "track_name":  "Runaway Baby",
+                      "artist":  "Bruno Mars",
+                      "year_init":  2010,
+                      "spotify_url":  "https://open.spotify.com/track/7hCNBVRhHzcsRAv0TQnOzq"
+                  },
+                  {
+                      "id":  "7ySUcLPVX7KudhnmNcgY2D",
+                      "track_name":  "S\u0026M",
+                      "artist":  "Rihanna",
+                      "year_init":  2010,
+                      "spotify_url":  "https://open.spotify.com/track/7ySUcLPVX7KudhnmNcgY2D"
                   }
               ]
 }
