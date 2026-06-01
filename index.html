@@ -18,17 +18,17 @@
   header { width: 100%; max-width: 480px; display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; font-size: 13px; color: #888; }
   header button, header a.btn { background: none; border: 1px solid #333; color: #aaa; padding: 6px 10px; border-radius: 6px; font-size: 13px; text-decoration: none; cursor: pointer; }
   header .group { display: flex; gap: 6px; }
-  .stage { flex: 1; width: 100%; max-width: 480px; display: grid; place-items: center; perspective: 1200px; padding: 8px 0; }
-  .card { position: relative; width: var(--card-size); height: var(--card-size); transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); --card-size: min(calc(100vw - 32px), 70vh, 480px); }
+  .stage { flex: 1; width: 100%; max-width: 480px; display: flex; align-items: center; justify-content: center; perspective: 1200px; padding: 8px 0; min-height: 0; }
+  .card { position: relative; flex: 0 0 auto; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.2,.7,.2,1); }
   .card.flipped { transform: rotateY(180deg); }
   .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
   .front { position: relative; }
   .qr { width: 64%; aspect-ratio: 1; background: #fff; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
   .qr svg, .qr img { width: 100%; height: 100%; display: block; }
   .back { transform: rotateY(180deg); color: #111; padding: 8% 8% 6%; text-align: center; position: relative; }
-  .back .artist { font-size: clamp(22px, 6.5vw, 34px); font-weight: 700; margin-top: 0; line-height: 1.15; }
-  .back .year { font-size: clamp(96px, 28vw, 170px); font-weight: 900; line-height: 0.95; letter-spacing: -4px; margin: 0.1em 0; color: #000; }
-  .back .title { font-size: clamp(18px, 5.2vw, 28px); font-style: italic; font-weight: 500; line-height: 1.25; }
+  .back .artist { font-size: clamp(20px, 5.5vw, 30px); font-weight: 700; margin-top: 0; line-height: 1.15; max-width: 100%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: break-word; }
+  .back .year { font-size: clamp(72px, 22vw, 140px); font-weight: 900; line-height: 0.95; letter-spacing: -3px; margin: 0.1em 0; color: #000; }
+  .back .title { font-size: clamp(16px, 4.6vw, 24px); font-style: italic; font-weight: 500; line-height: 1.25; max-width: 100%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; word-break: break-word; }
   .back .idx { position: absolute; bottom: 10px; right: 14px; font-size: 11px; opacity: 0.55; font-weight: 600; }
   .back .verify, .back .editBtn, .back .hideBtn { position: absolute; bottom: 8px; font-size: 11px; color: #111; text-decoration: none; opacity: 0.55; padding: 4px 8px; border: 1px solid rgba(0,0,0,0.3); border-radius: 6px; background: rgba(255,255,255,0.25); cursor: pointer; }
   .back .verify { left: 12px; }
@@ -201,6 +201,19 @@ function effectiveSong(s) {
   }
   return { ...s, year: s.year_init };
 }
+
+function sizeCard() {
+  const stage = document.querySelector('.stage');
+  if (!stage) return;
+  const w = stage.clientWidth;
+  const h = stage.clientHeight;
+  const size = Math.max(160, Math.min(w, h, 480));
+  const card = document.getElementById('card');
+  card.style.width = size + 'px';
+  card.style.height = size + 'px';
+}
+window.addEventListener('resize', sizeCard);
+window.addEventListener('orientationchange', sizeCard);
 
 function shuffle(arr) {
   const a = arr.slice();
@@ -455,7 +468,8 @@ document.getElementById('editModal').onclick = closeEdit;
     document.getElementById('loading').style.display = 'none';
     document.getElementById('card').style.display = '';
     document.getElementById('flipBtn').disabled = false;
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2034`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-01-2050`;
+    sizeCard();
     updateCorrCount();
     updateHiddenCount();
     reshuffle();
