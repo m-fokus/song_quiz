@@ -496,17 +496,23 @@ function renderQR(url) {
 }
 function render() {
   if (!deck.length) return;
+  const card = document.getElementById('card');
+  // If currently flipped, animate back to front first, THEN swap content
+  // (so the next card's data isn't visible mid-flip).
+  if (card.classList.contains('flipped')) {
+    card.classList.remove('flipped');
+    clearTimeout(render._t);
+    render._t = setTimeout(doRender, 560);
+    return;
+  }
+  doRender();
+}
+function doRender() {
+  if (!deck.length) return;
   const raw = deck[pos];
   const song = effectiveSong(raw);
   const color = COLORS[pos % COLORS.length];
   const card = document.getElementById('card');
-  // Snap back to front WITHOUT animation so the next card's info isn't visible mid-flip
-  if (card.classList.contains('flipped')) {
-    card.style.transition = 'none';
-    card.classList.remove('flipped');
-    void card.offsetWidth; // force reflow
-    card.style.transition = '';
-  }
   document.getElementById('front').style.background = color;
   const back = document.getElementById('back');
   back.style.background = color;
@@ -722,7 +728,7 @@ document.getElementById('editModal').onclick = closeEdit;
 (async () => {
   try {
     await Promise.all([loadSongs(), loadDb()]);
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-03-1153`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-03-1155`;
     updateCorrCount();
     updateHiddenCount();
     reshuffle();
