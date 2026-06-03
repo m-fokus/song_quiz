@@ -583,7 +583,14 @@ function render() {
   const raw = deck[pos];
   const song = effectiveSong(raw);
   const color = COLORS[pos % COLORS.length];
-  document.getElementById('card').classList.remove('flipped');
+  const card = document.getElementById('card');
+  // Snap back to front WITHOUT animation so the next card's info isn't visible mid-flip
+  if (card.classList.contains('flipped')) {
+    card.style.transition = 'none';
+    card.classList.remove('flipped');
+    void card.offsetWidth; // force reflow
+    card.style.transition = '';
+  }
   document.getElementById('front').style.background = color;
   const back = document.getElementById('back');
   back.style.background = color;
