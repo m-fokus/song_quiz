@@ -722,7 +722,7 @@ document.getElementById('editModal').onclick = closeEdit;
 (async () => {
   try {
     await Promise.all([loadSongs(), loadDb()]);
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-03-1152`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-03-1153`;
     updateCorrCount();
     updateHiddenCount();
     reshuffle();
