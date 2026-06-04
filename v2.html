@@ -60,24 +60,17 @@
   .back .actions a:active, .back .actions button:active { opacity: 1; }
   .back.edited::after { content: '✎'; position: absolute; top: 8px; right: 12px; font-size: 13px; opacity: 0.55; }
 
-  /* Player bar */
-  .player-bar {
-    width: 100%; display: flex; align-items: center; gap: 10px;
-    background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px;
-    padding: 8px 10px; min-height: 48px;
-  }
-  .player-bar .play-btn {
-    width: 36px; height: 36px; border-radius: 50%;
+  /* Play/Pause button (standalone, centered) */
+  .play-btn-big {
+    align-self: center;
+    width: 56px; height: 56px; border-radius: 50%;
     background: #1db954; border: none; color: #fff; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
     padding: 0;
   }
-  .player-bar .play-btn:disabled { opacity: 0.35; cursor: default; }
-  .player-bar .play-btn svg { width: 16px; height: 16px; fill: currentColor; }
-  .player-bar .info { flex: 1; min-width: 0; }
-  .player-bar .info .now { font-size: 12px; font-weight: 600; color: #eee; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .player-bar .info .by { font-size: 10px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .player-bar .info.idle .now { color: #666; font-weight: 500; }
+  .play-btn-big:disabled { opacity: 0.35; cursor: default; }
+  .play-btn-big:active:not(:disabled) { transform: scale(0.95); }
+  .play-btn-big svg { width: 24px; height: 24px; fill: currentColor; }
 
   /* Flip + Nav buttons */
   .flip-btn { width: 100%; padding: 14px; font-size: 15px; font-weight: 600; border-radius: 12px; border: 1px solid #444; background: #1a1a1a; color: #eee; cursor: pointer; }
@@ -173,16 +166,10 @@
         </div>
       </div>
 
-      <div class="player-bar" id="playerBar">
-        <button class="play-btn" id="playPauseBtn" disabled title="Play/Pause">
-          <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-        </button>
-        <div class="info idle" id="playerInfo">
-          <div class="now" id="playerNow">Bereit – tippe den QR-Code zum Abspielen</div>
-          <div class="by" id="playerBy">&nbsp;</div>
-        </div>
-      </div>
+      <button class="play-btn-big" id="playPauseBtn" disabled title="Play/Pause">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+      </button>
 
       <button class="flip-btn" id="flipBtn">Umdrehen</button>
       <div class="nav-row">
@@ -389,22 +376,6 @@ async function initSpotifyPlayer() {
 }
 
 function refreshPlayerUI() {
-  const info = document.getElementById('playerInfo');
-  const flipped = document.getElementById('card').classList.contains('flipped');
-  if (currentTrackId) {
-    info.classList.remove('idle');
-    if (flipped) {
-      document.getElementById('playerNow').textContent = currentTrackName;
-      document.getElementById('playerBy').textContent = currentTrackArtist;
-    } else {
-      document.getElementById('playerNow').textContent = '🎵 Mystery-Track';
-      document.getElementById('playerBy').textContent = 'Antwort auf der Rückseite';
-    }
-  } else {
-    info.classList.add('idle');
-    document.getElementById('playerNow').textContent = 'Bereit – tippe den QR-Code zum Abspielen';
-    document.getElementById('playerBy').innerHTML = '&nbsp;';
-  }
   document.getElementById('playIcon').style.display  = isPlaying ? 'none' : '';
   document.getElementById('pauseIcon').style.display = isPlaying ? '' : 'none';
 }
