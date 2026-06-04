@@ -409,11 +409,14 @@ async function resumePlayback() {
 }
 async function togglePlayPause() {
   if (!spotifyPlayer) return;
-  if (currentTrackId) {
+  const cardTrackId = deck.length ? deck[pos].id : null;
+  if (!cardTrackId) return;
+  // If the SDK is currently on this card's track → just toggle pause/resume.
+  // Otherwise (old track loaded in SDK from previous card) → start the new track.
+  if (currentTrackId === cardTrackId) {
     await spotifyPlayer.togglePlay();
   } else {
-    // Nothing playing yet — start current card's track
-    if (deck.length) playTrack(deck[pos].id);
+    playTrack(cardTrackId);
   }
 }
 
