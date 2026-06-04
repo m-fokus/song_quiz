@@ -423,6 +423,36 @@ $template = @'
 </style>
 </head>
 <body>
+<div id="mqGate" class="mq-gate">
+  <div class="mq-gate-box">
+    <h1 style="text-align:center;font-size:24px;margin:0 0 4px;color:#eee">Music Quiz</h1>
+    <input type="password" id="mqGatePw" placeholder="Passwort" autocomplete="current-password">
+    <button id="mqGateBtn">Öffnen</button>
+    <div id="mqGateErr"></div>
+  </div>
+</div>
+<style>
+  .mq-gate { position: fixed; inset: 0; background: #0a0a0a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .mq-gate.unlocked { display: none; }
+  .mq-gate-box { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 280px; }
+  .mq-gate input { padding: 12px 16px; font-size: 16px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; }
+  .mq-gate button { padding: 12px; font-size: 14px; font-weight: 700; border-radius: 8px; border: none; background: #1db954; color: #fff; cursor: pointer; }
+  .mq-gate #mqGateErr { color: #d04040; font-size: 12px; min-height: 16px; text-align: center; }
+</style>
+<script>
+(async () => {
+  const HASH = '03231b555c0bd8873659af9d9e88010b5f5af83c907b47d96957de3c84d9531f';
+  async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+  function unlock(){document.getElementById('mqGate').classList.add('unlocked');}
+  if (localStorage.getItem('mq_unlock') === '1') { unlock(); return; }
+  const pw = document.getElementById('mqGatePw');
+  const err = document.getElementById('mqGateErr');
+  async function tryUnlock(){if(!pw.value)return;const h=await sha(pw.value);if(h===HASH){localStorage.setItem('mq_unlock','1');unlock();}else{err.textContent='Falsches Passwort';pw.value='';pw.focus();}}
+  document.getElementById('mqGateBtn').addEventListener('click', tryUnlock);
+  pw.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+  setTimeout(() => pw.focus(), 100);
+})();
+</script>
 <div class="status" id="status"></div>
 
 <header>
