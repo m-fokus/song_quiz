@@ -256,6 +256,8 @@ let spotifyPlayer = null;
 let spotifyDeviceId = null;
 let isPlaying = false;
 let currentTrackId = null;
+let currentTrackName = '';
+let currentTrackArtist = '';
 
 // ========== Utilities ==========
 function showStatus(msg, isErr) {
@@ -374,8 +376,10 @@ async function initSpotifyPlayer() {
         const t = state.track_window && state.track_window.current_track;
         if (t) {
           currentTrackId = t.id;
-          updatePlayerUI(t.name, t.artists.map(a => a.name).join(', '), !state.paused);
+          currentTrackName = t.name;
+          currentTrackArtist = t.artists.map(a => a.name).join(', ');
         }
+        refreshPlayerUI();
       });
       player.connect();
     };
@@ -384,19 +388,25 @@ async function initSpotifyPlayer() {
   });
 }
 
-function updatePlayerUI(title, artist, playing) {
+function refreshPlayerUI() {
   const info = document.getElementById('playerInfo');
-  if (title) {
+  const flipped = document.getElementById('card').classList.contains('flipped');
+  if (currentTrackId) {
     info.classList.remove('idle');
-    document.getElementById('playerNow').textContent = title;
-    document.getElementById('playerBy').textContent = artist || '';
+    if (flipped) {
+      document.getElementById('playerNow').textContent = currentTrackName;
+      document.getElementById('playerBy').textContent = currentTrackArtist;
+    } else {
+      document.getElementById('playerNow').textContent = '🎵 Mystery-Track';
+      document.getElementById('playerBy').textContent = 'Antwort auf der Rückseite';
+    }
   } else {
     info.classList.add('idle');
     document.getElementById('playerNow').textContent = 'Bereit – tippe den QR-Code zum Abspielen';
     document.getElementById('playerBy').innerHTML = '&nbsp;';
   }
-  document.getElementById('playIcon').style.display  = playing ? 'none' : '';
-  document.getElementById('pauseIcon').style.display = playing ? '' : 'none';
+  document.getElementById('playIcon').style.display  = isPlaying ? 'none' : '';
+  document.getElementById('pauseIcon').style.display = isPlaying ? '' : 'none';
 }
 
 async function playTrack(trackId) {
@@ -644,10 +654,15 @@ function openHidden() {
 function closeHidden() { document.getElementById('hiddenModal').classList.remove('open'); }
 
 // ========== Wiring ==========
-document.getElementById('flipBtn').onclick    = () => document.getElementById('card').classList.toggle('flipped');
-document.getElementById('nextBtn').onclick    = async () => { if (pos < deck.length - 1) { await pausePlayback().catch(()=>{}); pos++; render(); } };
-document.getElementById('prevBtn').onclick    = async () => { if (pos > 0) { await pausePlayback().catch(()=>{}); pos--; render(); } };
-document.getElementById('shuffleBtn').onclick = () => { if (confirm('Stapel wirklich neu mischen?')) { pausePlayback().catch(()=>{}); reshuffle(); } };
+function clearPlayerState() {
+  currentTrackId = null; currentTrackName = ''; currentTrackArtist = '';
+  isPlaying = false;
+  refreshPlayerUI();
+}
+document.getElementById('flipBtn').onclick    = () => { document.getElementById('card').classList.toggle('flipped'); refreshPlayerUI(); };
+document.getElementById('nextBtn').onclick    = async () => { if (pos < deck.length - 1) { await pausePlayback().catch(()=>{}); clearPlayerState(); pos++; render(); } };
+document.getElementById('prevBtn').onclick    = async () => { if (pos > 0) { await pausePlayback().catch(()=>{}); clearPlayerState(); pos--; render(); } };
+document.getElementById('shuffleBtn').onclick = () => { if (confirm('Stapel wirklich neu mischen?')) { pausePlayback().catch(()=>{}); clearPlayerState(); reshuffle(); } };
 document.getElementById('listBtn').onclick    = openList;
 document.getElementById('hiddenBtn').onclick  = openHidden;
 document.getElementById('listModal').onclick   = closeList;
