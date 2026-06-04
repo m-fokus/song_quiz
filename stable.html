@@ -1,87 +1,3 @@
-﻿# Build Music Quiz app: songs.json + index.html from a resolved CSV.
-# Usage: .\build.ps1 -Csv "path\to\resolved.csv"
-param(
-  [Parameter(Mandatory=$true)][string]$Csv,
-  [string]$OutDir = (Split-Path -Parent $PSCommandPath),
-  [string]$BinId = '6a1dc80c06141515d3388249',
-  [string]$AccessKey = '$2a$10$SOKMRMzDUJmD.NonXmhRGO8TssnS1gSzOtExSmOJpSBTXR6EYQYg2'
-)
-
-$ErrorActionPreference = 'Stop'
-
-function Normalize-Track([string]$s) {
-  if (-not $s) { return '' }
-  $t = $s.ToLowerInvariant()
-  $t = [regex]::Replace($t, '\([^)]*\)', ' ')
-  $t = [regex]::Replace($t, '\[[^\]]*\]', ' ')
-  $i = $t.IndexOf(' - ')
-  if ($i -ge 0) { $t = $t.Substring(0, $i) }
-  $t = [regex]::Replace($t, '\b(feat\.?|ft\.?|featuring)\b.*', ' ')
-  $t = $t -replace '&', ' and '
-  $t = [regex]::Replace($t, "[^\p{L}\p{Nd}\s]", ' ')
-  $t = [regex]::Replace($t, '\s+', ' ').Trim()
-  return $t
-}
-
-function Normalize-Artist([string]$s) {
-  if (-not $s) { return '' }
-  $t = $s.ToLowerInvariant()
-  foreach ($sep in @(',', ' feat', ' ft', ' featuring', ' & ', ' x ', ' vs ')) {
-    $i = $t.IndexOf($sep)
-    if ($i -ge 0) { $t = $t.Substring(0, $i) }
-  }
-  $t = [regex]::Replace($t, "[^\p{L}\p{Nd}\s]", ' ')
-  $t = [regex]::Replace($t, '\s+', ' ').Trim()
-  return $t
-}
-
-function Get-TrackId([string]$url) {
-  if ($url -match 'track/([A-Za-z0-9]+)') { return $Matches[1] }
-  return ''
-}
-
-$rows = Import-Csv -Path $Csv -Encoding UTF8
-$total = $rows.Count
-$withYear = $rows | Where-Object { $_.Year -match '^\d{4}$' }
-$droppedNoYear = $total - $withYear.Count
-
-$seen = @{}
-$kept = New-Object System.Collections.Generic.List[object]
-$droppedDup = 0
-foreach ($r in $withYear) {
-  $key = (Normalize-Artist $r.Artist) + '|' + (Normalize-Track $r.Song)
-  if ($seen.ContainsKey($key)) { $droppedDup++; continue }
-  $seen[$key] = $true
-  $kept.Add($r) | Out-Null
-}
-
-Write-Host "Total in CSV:    $total"
-Write-Host "Dropped (year):  $droppedNoYear"
-Write-Host "Dropped (dupe):  $droppedDup"
-Write-Host "Kept:            $($kept.Count)"
-
-$version = Get-Date -Format 'yyyy-MM-dd-HHmm'
-
-$songs = $kept | ForEach-Object {
-  [pscustomobject]@{
-    id          = (Get-TrackId $_.Link)
-    track_name  = $_.Song
-    artist      = $_.Artist
-    year_init   = [int]$_.Year
-    spotify_url = $_.Link
-  }
-}
-$songsObj = [pscustomobject]@{
-  version = $version
-  count   = $kept.Count
-  songs   = $songs
-}
-$songsJson = $songsObj | ConvertTo-Json -Depth 4
-$songsPath = Join-Path $OutDir 'songs.json'
-[IO.File]::WriteAllText($songsPath, $songsJson, (New-Object Text.UTF8Encoding $false))
-Write-Host "Wrote: $songsPath"
-
-$template = @'
 <!doctype html>
 <html lang="de">
 <head>
@@ -500,8 +416,8 @@ $template = @'
 </div>
 
 <script>
-const BIN_ID = '__BIN_ID__';
-const ACCESS_KEY = '__ACCESS_KEY__';
+const BIN_ID = '6a1dc80c06141515d3388249';
+const ACCESS_KEY = '$2a$10$SOKMRMzDUJmD.NonXmhRGO8TssnS1gSzOtExSmOJpSBTXR6EYQYg2';
 const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 const COLORS = ['#e8534a','#f08a3e','#f0c93a','#9ed24a','#4ac98a','#4ab7d2','#5a8de0','#a47ed2','#d26ea8','#e57e7e'];
 
@@ -812,7 +728,7 @@ document.getElementById('editModal').onclick = closeEdit;
 (async () => {
   try {
     await Promise.all([loadSongs(), loadDb()]);
-    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v__APP_VERSION__`;
+    document.getElementById('footer').textContent = `Daten v${songsVersion} · ${songs.length} Songs · App v2026-06-04-1436`;
     updateCorrCount();
     updateHiddenCount();
     reshuffle();
@@ -824,11 +740,3 @@ document.getElementById('editModal').onclick = closeEdit;
 </script>
 </body>
 </html>
-'@
-
-$html = $template.Replace('__BIN_ID__', $BinId).Replace('__ACCESS_KEY__', $AccessKey).Replace('__APP_VERSION__', $version)
-$indexPath = Join-Path $OutDir 'stable.html'
-[IO.File]::WriteAllText($indexPath, $html, (New-Object Text.UTF8Encoding $false))
-Write-Host "Wrote: $indexPath"
-Write-Host ""
-Write-Host "Done. App version: $version"
