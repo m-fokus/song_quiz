@@ -317,6 +317,8 @@ let startMode = localStorage.getItem('v3_start_mode') || 'start';
 
 let gameState = 'idle'; // 'idle' | 'spinning' | 'ready' | 'playing' | 'paused'
 let currentCategory = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+let pickHistory = [];       // last 3 picked category ids
+let categoryCooldown = {};  // { categoryId: spins_left_until_pickable }
 let playedMs = 0;
 let ticker = null;
 let tickerStartedAt = 0;
@@ -492,11 +494,31 @@ function applyCategory(cat) {
   document.getElementById('catLabelBack').textContent = cat.label;
 }
 
+function pickCategory() {
+  // Decrement all cooldowns by 1
+  Object.keys(categoryCooldown).forEach(k => {
+    categoryCooldown[k]--;
+    if (categoryCooldown[k] <= 0) delete categoryCooldown[k];
+  });
+  // Allowed = not currently on cooldown
+  const allowed = CATEGORIES.filter(c => !categoryCooldown[c.id]);
+  const pool = allowed.length ? allowed : CATEGORIES; // safety fallback
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  // Track history
+  pickHistory.push(chosen.id);
+  if (pickHistory.length > 3) pickHistory.shift();
+  // If last 3 are same → put that category on cooldown for the next 2 spins
+  if (pickHistory.length === 3 && pickHistory[0] === pickHistory[1] && pickHistory[1] === pickHistory[2]) {
+    categoryCooldown[chosen.id] = 2;
+  }
+  return chosen;
+}
+
 function spin() {
   if (gameState === 'spinning' || !deck.length) return;
   gameState = 'spinning';
   refreshBigBtn();
-  const chosen = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+  const chosen = pickCategory();
   let idx = Math.floor(Math.random() * CATEGORIES.length);
   const started = Date.now();
   const duration = 2500;
